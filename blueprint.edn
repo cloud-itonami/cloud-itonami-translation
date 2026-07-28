@@ -1,0 +1,33 @@
+{:itonami.blueprint/id "cloud-itonami-translation"
+ :itonami.blueprint/name "Translation Procurement & Quality Exchange"
+ :itonami.blueprint/domain :translation/procurement
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:language-access :small-publisher-access :transparency]
+ :itonami.blueprint/governor :translation-governor
+ :itonami.blueprint/robotics false
+ :itonami.blueprint/required-technologies [:identity :audit-ledger :payments :inference]
+ :itonami.blueprint/optional-technologies [:human-review]
+ :itonami.blueprint/status :public-oss
+ :itonami.blueprint/maturity :implemented
+ :itonami.blueprint/keying :function
+ :itonami.blueprint/adr "2607289100-translation-as-a-procured-service"
+
+ ;; A BUYER-side actor. Every other cloud-itonami blueprint sells something it
+ ;; produces; this one's cost of goods is inference it does not own, bought
+ ;; from whichever x402 seller the catalog offers. That makes procurement —
+ ;; not translation — the thing it is actually good at.
+ :itonami.blueprint/orchestrator true
+ :itonami.blueprint/procures
+ {:from :x402-catalog
+  :facilitator "https://x402.nexus"
+  :settlement :nexus-x402
+  :metering-countersign "https://github.com/gftdcojp/engi"}
+
+ ;; The API is NOT new. i18n.etzhayyim.com already defines RegisterProject /
+ ;; TranslateBatch / WidgetApprove / GetLanguageRegistry, and kotoba-lang/i18n
+ ;; already ships i18n.tm-import as the client bridge. This actor implements
+ ;; that contract rather than inventing a second one.
+ :itonami.blueprint/implements-contract
+ {:service "i18n.etzhayyim.com"
+  :methods [:RegisterProject :TranslateBatch :WidgetApprove :GetLanguageRegistry]
+  :client-bridge "kotoba-lang/i18n :: i18n.tm-import"}}
