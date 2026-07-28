@@ -41,7 +41,7 @@
 (defn review-plan
   "Decide whether a procurement plan may execute.
   → {:decision :commit|:hold|:reject :reason kw :plan plan}"
-  [plan {:keys [budget-usd] :as _order} & [{:keys [auto-approve-usd] :as policy}]]
+  [plan {:keys [budget-usd] :as _order} & [policy]]
   (let [{:keys [auto-approve-usd]} (merge default-policy policy)
         cost (:cost-usd plan)]
     (cond

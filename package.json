@@ -1,0 +1,10 @@
+{
+  "name": "cloud-itonami-translation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "shadow-cljs release worker",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "devDependencies": { "shadow-cljs": "2.28.20" }
+}

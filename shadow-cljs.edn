@@ -1,0 +1,9 @@
+;; The Worker is the only namespace that touches I/O; everything it decides
+;; lives in the pure .cljc core, which is why the test build has no :worker
+;; dependency and runs on the JVM.
+{:deps {:aliases [:cljs]}
+ :builds
+ {:worker {:target :esm
+           :output-dir "dist"
+           :modules {:worker {:exports {default translation.edge.worker/handler}}}
+           :compiler-options {:optimizations :simple}}}}

@@ -2,7 +2,8 @@
   "Tests are written against the SHAPES production actually produced on
   2026-07-27/28, not invented ones — every fixture below is a real defect or a
   real catalog response."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [clojure.string :as str]
+            [clojure.test :refer [deftest is testing]]
             [translation.governor :as gov]
             [translation.order :as order]
             [translation.procurement :as proc]
@@ -65,7 +66,7 @@
   (let [v (qa/verdict :ko " にメッセージ…" "메시지를 입력하세요…")]
     (is (:accepted? v))
     (is (:repaired? v))
-    (is (clojure.string/starts-with? (:translated v) " "))))
+    (is (str/starts-with? (:translated v) " "))))
 
 (deftest batch-verdict-prices-by-usable-output
   (let [{:keys [accept-rate rejected]}

@@ -1,0 +1,20 @@
+{
+  "name": "cloud-itonami-translation",
+  "main": "dist/worker.js",
+  "compatibility_date": "2025-03-17",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    // Read-only until an operator raises it. Phase 0 computes plans and
+    // reports status but writes nothing — the safe default for an actor that
+    // spends money.
+    "PHASE": "0",
+    "X402_CATALOG_URL": "https://x402.nexus/catalog",
+    // Backends the operator already reaches directly. Procurement refuses to
+    // buy these back; leaving this empty is how you pay ~$160 to rent your own
+    // fleet (ADR-2607289300).
+    "FREE_BACKENDS": "murakumo.cloud,infer.murakumo.cloud,api.murakumo.cloud"
+  }
+  // d1_databases: bind TRANSLATION_DB before raising PHASE above 0. Without it
+  // the actor runs in-memory and /health reports durable:false rather than
+  // pretending a write survived.
+}

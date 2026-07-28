@@ -38,6 +38,28 @@ problems, and they are what this actor is made of.
 | `translation.procurement` | x402 `/catalog` → a plan; refuses to buy capacity the operator already has |
 | `translation.qa` | acceptance checks and the small set of mechanical repairs |
 | `translation.governor` | spend / quality / publication gates; decides what settles |
+| `translation.advisor` | the contained intelligence node — proposes, never writes |
+| `translation.phase` | 0→3 rollout; spending never auto-commits at any phase |
+| `translation.operation` | one request = one supervised StateGraph run |
+| `translation.store` | SSoT + append-only ledger, and the two reconciliation queries |
+| `translation.edge.worker` | the XRPC/D1 host half — I/O only, no rules |
+
+### Containment
+
+The advisor proposes; it cannot act. Three things it structurally cannot do,
+each because the alternative already cost something:
+
+- **name a price** — plans are priced from the catalog offer, and no code path
+  reads a price out of a request;
+- **accept its own work** — the verdict comes from `translation.qa`, computed
+  by the governor;
+- **declare capacity** — that is backend-deduplication in procurement, not an
+  opinion.
+
+`:plan-procurement` is absent from every phase's auto-commit set **including
+phase 3**. Recording an outcome may be automatic; deciding to spend may not.
+A rejected delivery is still *recorded* — a supplier who delivered garbage must
+be distinguishable from one who was never used — it is simply not payable.
 
 ### The API is not new
 
@@ -84,9 +106,27 @@ decline to honour.
 
 ## Status
 
-Pure core implemented and tested (17 tests / 48 assertions, `clojure -M:test`).
-The edge worker (XRPC surface + D1 ledger + x402 settlement wiring) is the next
-increment and is **not** built yet — see the ADR's "not done here" section.
+**Implemented**: advisor, governor, phase gate, StateGraph operation,
+store + append-only ledger, and the edge worker (XRPC surface over D1).
+32 tests / 85 assertions (`clojure -M:test`), clean `clojure -M:lint`,
+`npm run build` produces the Worker bundle.
+
+**Not done, and not claimed**:
+
+- **no operational history.** Nothing has run in production. `:maturity
+  :implemented` in `blueprint.edn` means the parts exist and are tested — it
+  has never meant "has been used".
+- **no x402 payment execution.** Procurement decides *whether and from whom*
+  to buy; performing the 402 challenge → USDC transfer → settle → receipt
+  match is not wired. `record-payment!` exists so the ledger can hold a
+  receipt; nothing produces one yet.
+- **no dispatcher.** `TranslateBatch` records what a supplier delivered. The
+  component that actually calls N providers in parallel is the next increment,
+  and it is deliberately separate from acceptance: the thing that judges the
+  work must not be the thing that produced it.
+- **not deployed.** `wrangler.jsonc` ships `PHASE: "0"` (read-only) and no D1
+  binding, so a careless deploy writes nothing.
+- **RAD identity not registered.**
 
 ## License
 

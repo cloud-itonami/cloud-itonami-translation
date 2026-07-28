@@ -1,7 +1,18 @@
 {:paths ["src"]
- :deps {}
+ ;; langgraph-clj brings langchain-clj transitively (both zero-/single-dep,
+ ;; all .cljc). Pinned by git coordinate, not a sibling path: this repo is
+ ;; standalone and CI checks it out alone, so ../.. never resolves there.
+ :deps {io.github.com-junkawasaki/langgraph-clj
+        {:git/url "https://github.com/kotoba-lang/langgraph.git"
+         :git/sha "577a59a9d5eb3ef90b81342f4673973f481ff7f4"}}
  :aliases
  {:dev {:extra-paths ["test"]}
+  ;; the Worker build; the pure core needs none of this, which is the point
+  :cljs {:extra-deps {org.clojure/clojurescript {:mvn/version "1.11.132"}
+                      thheller/shadow-cljs {:mvn/version "2.28.20"}}}
+  :lint {:replace-deps {clj-kondo/clj-kondo {:mvn/version "2024.11.14"}}
+         :main-opts ["-m" "clj-kondo.main" "--lint" "src" "test"
+                     "--fail-level" "error"]}
   :test {:extra-paths ["test"]
          :extra-deps {io.github.cognitect-labs/test-runner
                       {:git/url "https://github.com/cognitect-labs/test-runner"

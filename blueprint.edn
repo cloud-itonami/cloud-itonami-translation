@@ -6,9 +6,16 @@
  :itonami.blueprint/governor :translation-governor
  :itonami.blueprint/robotics false
  :itonami.blueprint/required-technologies [:identity :audit-ledger :payments :inference]
+ :itonami.blueprint/graph :langgraph-stategraph
+ :itonami.blueprint/ledger :append-only-d1
  :itonami.blueprint/optional-technologies [:human-review]
  :itonami.blueprint/status :public-oss
+ ;; :implemented = advisor / governor / phase / operation / store+ledger /
+ ;; edge worker all exist and are tested. NOT the same as "has run in
+ ;; production" — this actor has no operational history yet, and
+ ;; blueprint maturity has never meant that.
  :itonami.blueprint/maturity :implemented
+ :itonami.blueprint/phase-default 0
  :itonami.blueprint/keying :function
  :itonami.blueprint/adr "2607289100-translation-as-a-procured-service"
 

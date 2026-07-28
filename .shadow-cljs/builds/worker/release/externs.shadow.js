@@ -1,0 +1,15 @@
+/** @const {ShadowJS} */ var Promise;
+/** @const {ShadowJS} */ var Response;
+/** @const {ShadowJS} */ var URL;
+/** @const {ShadowJS} */ var fetch;
+/** @const {ShadowJS} */ var module;
+ShadowJS.prototype.NEGATIVE_INFINITY;
+ShadowJS.prototype.NaN;
+ShadowJS.prototype.POSITIVE_INFINITY;
+ShadowJS.prototype.fromCharCode;
+ShadowJS.prototype.getLength;
+ShadowJS.prototype.parse;
+ShadowJS.prototype.prepare;
+ShadowJS.prototype.resolve;
+ShadowJS.prototype.run;
+ShadowJS.prototype.stringify;
