@@ -1,3 +1,18 @@
 /.cpcache/
 /target/
 /node_modules/
+
+# The Worker bundle. NOT tracked, deliberately.
+#
+# `wrangler.jsonc`'s "main" is dist/worker.js, and wrangler has no way to know
+# whether a build ran. While this file was committed, a plain `wrangler deploy`
+# would happily upload whatever bundle happened to be in the last commit and
+# exit 0 — shipping old code with no warning. Untracked, that same command
+# fails with exit 1 ("Could not resolve ... dist/worker.js") and the only way
+# to deploy is `npm run deploy`, which builds first.
+#
+# Measured 2026-08-13 (ADR-2608136200): `shadow-cljs release worker` regenerates
+# this file from a clean tree with byte-identical semantics — 841 distinct
+# string literals in the committed copy, the same 841 in the rebuild — so
+# nothing is lost by not carrying it in git.
+/dist/
