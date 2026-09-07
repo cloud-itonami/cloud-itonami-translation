@@ -16,3 +16,4 @@
 # string literals in the committed copy, the same 841 in the rebuild — so
 # nothing is lost by not carrying it in git.
 /dist/
+/.shadow-cljs/
