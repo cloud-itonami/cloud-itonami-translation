@@ -16,7 +16,7 @@
   `:tier/reach` is therefore the default, and `:tier/uniform` (the old
   behaviour: alphabetical, all-or-nothing) is kept only so the difference is
   measurable rather than asserted."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; Speaker counts (L1+L2, Ethnologue 2026 order of magnitude). Used ONLY for
 ;; ordering, never displayed as fact — the ranking is stable even where the
