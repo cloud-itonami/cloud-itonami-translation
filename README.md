@@ -42,6 +42,7 @@ problems, and they are what this actor is made of.
 | `translation.phase` | 0→3 rollout; spending never auto-commits at any phase |
 | `translation.operation` | one request = one supervised StateGraph run |
 | `translation.store` | SSoT + append-only ledger, and the two reconciliation queries |
+| `translation.publish` | the publish bridge (slice d): governor-gated catalogs → i18n-cid DAG-CBOR block → IPFS PSA pin → kotobase-lake admit |
 | `translation.edge.worker` | the XRPC/D1 host half — I/O only, no rules |
 
 ### Containment
@@ -107,8 +108,10 @@ decline to honour.
 ## Status
 
 **Implemented**: advisor, governor, phase gate, StateGraph operation,
-store + append-only ledger, and the edge worker (XRPC surface over D1).
-32 tests / 85 assertions (`clojure -M:test`), clean `clojure -M:lint`,
+store + append-only ledger, the edge worker (XRPC surface over D1), and the
+publish bridge (`translation.publish` → i18n-cid block → IPFS pin →
+kotobase-lake admit).
+36 tests / 110 assertions (`clojure -M:test`), clean `clojure -M:lint`,
 `npm run build` produces the Worker bundle.
 
 **Not done, and not claimed**:
@@ -116,6 +119,9 @@ store + append-only ledger, and the edge worker (XRPC surface over D1).
 - **no operational history.** Nothing has run in production. `:maturity
   :implemented` in `blueprint.edn` means the parts exist and are tested — it
   has never meant "has been used".
+- **no live publish transport.** The publish bridge is seam-injected by design
+  (`:put-block-fn`, `:post-fn`): it encodes, pins, and admits, but nothing yet
+  points it at a real kotobase block store or a real `/pins` PSA endpoint.
 - **no x402 payment execution.** Procurement decides *whether and from whom*
   to buy; performing the 402 challenge → USDC transfer → settle → receipt
   match is not wired. `record-payment!` exists so the ledger can hold a

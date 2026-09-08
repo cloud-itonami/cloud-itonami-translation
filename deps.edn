@@ -4,7 +4,14 @@
  ;; standalone and CI checks it out alone, so ../.. never resolves there.
  :deps {io.github.com-junkawasaki/langgraph-clj
         {:git/url "https://github.com/kotoba-lang/langgraph.git"
-         :git/sha "577a59a9d5eb3ef90b81342f4673973f481ff7f4"}}
+         :git/sha "577a59a9d5eb3ef90b81342f4673973f481ff7f4"}
+        ;; Publish bridge (slice d): encode accepted catalogs as i18n-cid
+        ;; DAG-CBOR blocks, pin them, admit them to the kotobase-lake plane.
+        ;; io.github.<org>/<name> is bare :git/sha — tools.deps infers
+        ;; https://github.com/<org>/<name>.git. Pulls io-ipld + kotobase-lake
+        ;; transitively.
+        io.github.kotoba-lang/i18n-cid
+        {:git/sha "f7cda3da863f4c4bbf64ff5bedddf99d2ad5105d"}}
  :aliases
  {:dev {:extra-paths ["test"]}
   ;; the Worker build; the pure core needs none of this, which is the point
