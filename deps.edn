@@ -2,7 +2,12 @@
  ;; langgraph-clj brings langchain-clj transitively (both zero-/single-dep,
  ;; all .cljc). Pinned by git coordinate, not a sibling path: this repo is
  ;; standalone and CI checks it out alone, so ../.. never resolves there.
- :deps {io.github.com-junkawasaki/langgraph-clj
+ :deps {
+        ;; kotoba.lang.text, not clojure.string. Pinned as an explicit floor:
+        ;; tools.deps takes the NEWEST sha it is shown, so without a floor here
+        ;; this repo silently rides whatever a sibling happens to name.
+        io.github.kotoba-lang/text {:git/sha "73bdb13ae7a3d004b44bca08be03a3191157a38f"}
+       io.github.com-junkawasaki/langgraph-clj
         {:git/url "https://github.com/kotoba-lang/langgraph.git"
          :git/sha "577a59a9d5eb3ef90b81342f4673973f481ff7f4"}
         ;; Publish bridge (slice d): encode accepted catalogs as i18n-cid

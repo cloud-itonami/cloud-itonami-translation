@@ -18,7 +18,7 @@
   Capacity therefore has exactly two honest sources — a genuinely independent
   seller, or more fleet — and `plan` reports which one a given catalog can
   actually give you."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (defn parse-catalog
   "x402 `/catalog` body → normalised offers. Pure.
@@ -47,7 +47,7 @@
   same catalog and is not inference."
   [offers]
   (filterv (fn [{:keys [method gateway]}]
-             (and (= "POST" (str/upper-case (str method)))
+             (and (= "POST" (str/upper (str method)))
                   (re-find #"/v1/(messages|chat)" (str gateway))))
            offers))
 

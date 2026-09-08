@@ -29,7 +29,7 @@
   lone %-token standing in for a single placeholder are mechanical and
   unambiguous, so `repair` fixes them and the string passes. Everything else
   is a real defect and the batch is refused."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 ;; ── script detection ─────────────────────────────────────────────────
 

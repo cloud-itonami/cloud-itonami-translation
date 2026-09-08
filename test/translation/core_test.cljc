@@ -2,7 +2,7 @@
   "Tests are written against the SHAPES production actually produced on
   2026-07-27/28, not invented ones — every fixture below is a real defect or a
   real catalog response."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [clojure.test :refer [deftest is testing]]
             [translation.governor :as gov]
             [translation.order :as order]
