@@ -27,7 +27,7 @@
     FREE_BACKENDS        comma-separated hosts the operator already reaches;
                          procurement refuses to buy these back
     PHASE                0–3 rollout gate (default 0 — read-only)"
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [goog.object :as gobj]
             [translation.operation :as op]
             [translation.order :as order]
