@@ -111,7 +111,7 @@ decline to honour.
 store + append-only ledger, the edge worker (XRPC surface over D1), and the
 publish bridge (`translation.publish` → i18n-cid block → IPFS pin →
 kotobase-lake admit).
-36 tests / 110 assertions (`clojure -M:test`), clean `clojure -M:lint`,
+36 tests / 110 assertions (`kbb -M:test`), clean `kbb -M:lint`,
 `npm run build` produces the Worker bundle.
 
 **Not done, and not claimed**:

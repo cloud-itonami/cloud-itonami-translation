@@ -11,7 +11,7 @@
 # fails with exit 1 ("Could not resolve ... dist/worker.js") and the only way
 # to deploy is `npm run deploy`, which builds first.
 #
-# Measured 2026-08-13 (ADR-2608136200): `shadow-cljs release worker` regenerates
+# Measured 2026-08-13 (ADR-2608136200): `amu compile --target wasm32-browser worker` regenerates
 # this file from a clean tree with byte-identical semantics — 841 distinct
 # string literals in the committed copy, the same 841 in the rebuild — so
 # nothing is lost by not carrying it in git.
