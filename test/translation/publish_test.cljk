@@ -3,7 +3,7 @@
   (encode → store → index → pin → lake-admit), verifying BOTH that a
   governor-accepted catalog is published in that order, and that a catalog the
   TranslationGovernor refuses is never stored, pinned, or admitted."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [i18n-cid.core :as ic]
             [translation.publish :as pub]))
 

@@ -1,6 +1,6 @@
 (ns translation.actor-test
   "The actor half: store/ledger, phase gates, and the supervised run."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [translation.advisor :as advisor]
             [translation.operation :as op]
             [translation.order :as order]

@@ -17,3 +17,4 @@
 # nothing is lost by not carrying it in git.
 /dist/
 /.shadow-cljs/
+.nbb/
