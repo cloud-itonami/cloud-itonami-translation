@@ -30,7 +30,7 @@
 
   `:flag-supply-concern` is likewise never automatic — a flag exists to reach
   a human, so auto-committing it defeats its only purpose."
-  (:require [clojure.set :as set]))
+  (:require [kotoba.lang.coll :as set]))
 
 (def phases
   {0 {:name :read-only        :writes #{}                                        :auto #{}}
