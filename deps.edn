@@ -25,7 +25,9 @@
         ;; https://github.com/<org>/<name>.git. Pulls io-ipld + kotobase-lake
         ;; transitively.
         io.github.kotoba-lang/i18n-cid
-        {:git/sha "f7cda3da863f4c4bbf64ff5bedddf99d2ad5105d"}}
+        {:git/url "https://github.com/kotoba-lang/kotoba.git"
+         :git/sha "e09192276fd6a111dfb9959bfc75ddeba555e840"
+         :deps/root "lib/kotoba.i18nCid"}}
  :aliases
  {:dev {:extra-paths ["test"]}
   ;; the Worker build; the pure core needs none of this, which is the point
